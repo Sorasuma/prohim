@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Прохим — производитель автохимии и бытовой химии (прототип главной)</title>
+<style>
+:root{--bg:#f4f4f5;--surface:#fff;--ink:#111;--muted:#5f5f66;--line:#e3e3e6;--brand:#111;--brand-ink:#fff;--accent:#d7141a;--soft:#efeff1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b0c;--surface:#161618;--ink:#f3f3f4;--muted:#a3a3ab;--line:#2a2a2e;--brand:#26262a;--brand-ink:#fff;--accent:#ea2a30;--soft:#1f1f22}}
+:root[data-theme="dark"]{--bg:#0b0b0c;--surface:#161618;--ink:#f3f3f4;--muted:#a3a3ab;--line:#2a2a2e;--brand:#26262a;--brand-ink:#fff;--accent:#ea2a30;--soft:#1f1f22}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:#0d0d0d;border-bottom:3px solid var(--accent)}
+.bar{display:flex;align-items:center;gap:20px;height:64px}
+.logo{display:flex;align-items:center;font-weight:800;font-size:22px;letter-spacing:-.02em;color:#fff}
+.logo b{color:var(--accent)}
+.logo img{display:block;height:34px;width:auto}
+nav{display:flex;gap:4px;margin-left:12px;flex:1}
+nav a{padding:8px 12px;border-radius:8px;color:#c9c9ce;font-weight:500;font-size:15px}
+nav a:hover{background:#222;color:#fff}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:600;font-size:15px;border:1.5px solid transparent;cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:var(--line);background:var(--surface);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--accent)}
+.phone{color:#fff;font-weight:600;font-size:15px;white-space:nowrap}
+.hero{padding:56px 0 48px;background:#0d0d0d;color:#fff;background-image:linear-gradient(115deg,transparent 62%,rgba(215,20,26,.16) 62%)}
+.hero h1{color:#fff}
+.hero .lead,.hero .cta small{color:#c9c9ce}
+.hero .btn.ghost{background:transparent;color:#fff;border-color:#4a4a50}
+.hero .check li{color:#e6e6e9}
+.hero .check{margin-top:28px;grid-template-columns:1fr 1fr;gap:10px 20px}
+.hero .stat b{color:#fff}.hero .stat span{color:#b5b5bb}
+.art{width:100%;height:auto;display:block}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-.03em;margin:12px 0 16px}
+.lead{color:var(--muted);font-size:18px;max-width:560px;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta small{color:var(--muted)}
+.cta small a{color:#fff;font-weight:600;text-decoration:underline}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.panel h3{margin:0 0 14px;font-size:17px}
+.check{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.check li{display:flex;gap:10px;font-size:14px}
+.check li::before{content:"✓";color:var(--accent);font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.stat{padding:18px 4px;border-top:3px solid var(--accent)}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em}
+.stat span{color:var(--muted);font-size:14px}
+section{padding:64px 0}
+h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 32px;max-width:640px}
+.paths{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.path{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.path.main{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.path h3{margin:0;font-size:21px}
+.path p{margin:0;color:var(--muted);font-size:15px;flex:1}
+.path.main p{color:inherit;opacity:.85}
+.path .more{font-weight:600;margin-top:8px}
+.path.main .btn{background:var(--accent);color:#fff;align-self:flex-start}
+.tabs{display:inline-flex;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:24px}
+.tab{border:0;background:none;padding:10px 20px;border-radius:9px;font:600 15px inherit;font-family:inherit;color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.grid[hidden]{display:none}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-height:118px;transition:.15s}
+.tile:hover{border-color:var(--accent);transform:translateY(-2px)}
+.tile i{font-style:normal;width:36px;height:36px;border-radius:10px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:14px}
+.tile span{font-weight:600;font-size:15px;line-height:1.3}
+.alt{background:var(--surface);border-block:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.col h3{margin:0 0 6px;font-size:17px}
+.col p{margin:0;color:var(--muted);font-size:15px}
+.col .n{color:var(--accent);font-weight:800;font-size:14px}
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card time{color:var(--muted);font-size:13px}
+.card h4{margin:6px 0 0;font-size:16px;line-height:1.35}
+.lead-form{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;background:var(--brand);color:var(--brand-ink);border-radius:22px;padding:40px}
+.lead-form h2{margin-bottom:10px}
+.lead-form p{margin:0;opacity:.85}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+form .full{grid-column:1/-1}
+input,select{width:100%;padding:13px 14px;border-radius:10px;border:1px solid transparent;font:inherit;background:#fff;color:#0f1f33}
+form .btn{grid-column:1/-1;background:var(--accent);color:#fff}
+.ok{grid-column:1/-1;font-weight:600}
+footer{padding:40px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:24px}
+.foot h5{margin:0 0 10px;color:var(--ink);font-size:14px}
+.foot a{display:block;padding:3px 0}
+.foot a:hover{color:var(--ink)}
+.note{margin-top:28px;font-size:12px}
+@media (max-width:900px){
+nav,.phone{display:none}.bar{justify-content:space-between}
+.hero-grid,.paths,.lead-form{grid-template-columns:1fr}
+.stats,.cols{grid-template-columns:repeat(2,1fr)}
+.news{grid-template-columns:1fr}.foot{grid-template-columns:1fr 1fr}
+.lead-form{padding:26px}form{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap bar">
+<a class="logo" href="#"><img alt="Прохим" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132' height='34' viewBox='0 0 132 34'%3E%3Crect width='132' height='34' rx='6' fill='%23d7141a'/%3E%3Ctext x='66' y='24' text-anchor='middle' font-family='Arial,sans-serif' font-weight='800' font-size='20' fill='%23fff' letter-spacing='1'%3EPROHIM%3C/text%3E%3C/svg%3E"></a>
+<nav>
+<a href="#catalog">Каталог</a><a href="#dealers">Дилерам</a><a href="https://ctm.pro-him.com">Контрактное производство</a><a href="#quality">О заводе</a><a href="#contacts">Контакты</a>
+</nav>
+<a class="phone" href="tel:88005556786">8 800 555-67-86</a>
+<a class="btn primary" href="#request">Стать дилером</a>
+</div>
+</header>
+
+<main>
+<div class="hero">
+<div class="wrap">
+<div class="hero-grid">
+<div>
+<div class="eyebrow">НПО Прохим · завод-производитель</div>
+<h1>Автохимия и бытовая химия для вашего бизнеса</h1>
+<p class="lead">Оптовые поставки от производителя во все регионы России и СНГ. Стабильные цены, контроль качества на каждом этапе и готовая дилерская программа.</p>
+<div class="cta">
+<a class="btn primary" href="#request">Стать дилером</a>
+<a class="btn ghost" href="#request">Получить прайс-лист</a>
+<small>Нужна своя марка? <a href="https://ctm.pro-him.com">Контрактное производство →</a></small>
+</div>
+<ul class="check"><li>Цены завода без лишних посредников</li><li>Более 19 категорий: авто, клининг, бытовая химия</li><li>Фасовка для мойки, сервиса и розницы: от аэрозолей до канистр</li><li>Поставки в регионы России и СНГ</li></ul>
+</div>
+<svg class="art" viewBox="0 0 460 340" role="img" aria-label="Продукция Прохим: аэрозоли, канистра и бутылки">
+<rect x="20" y="300" width="420" height="10" rx="5" fill="#d7141a"/>
+<g><rect x="40" y="90" width="78" height="210" rx="14" fill="#f3f3f4"/><rect x="58" y="60" width="42" height="34" rx="6" fill="#2a2a2e"/><rect x="40" y="150" width="78" height="60" fill="#d7141a"/><text x="79" y="188" text-anchor="middle" font-family="Arial" font-weight="800" font-size="16" fill="#fff">АВТО</text></g>
+<g><rect x="140" y="60" width="86" height="240" rx="14" fill="#1c1c1f" stroke="#3a3a40"/><rect x="160" y="28" width="46" height="36" rx="6" fill="#d7141a"/><rect x="140" y="130" width="86" height="70" fill="#d7141a"/><text x="183" y="174" text-anchor="middle" font-family="Arial" font-weight="800" font-size="17" fill="#fff">PROHIM</text></g>
+<g><rect x="250" y="120" width="120" height="180" rx="16" fill="#f3f3f4"/><rect x="284" y="94" width="52" height="30" rx="6" fill="#2a2a2e"/><path d="M370 150h26q14 0 14 14v50q0 14-14 14h-26" fill="none" stroke="#f3f3f4" stroke-width="12"/><rect x="250" y="176" width="120" height="66" fill="#0d0d0d"/><text x="310" y="216" text-anchor="middle" font-family="Arial" font-weight="800" font-size="16" fill="#fff">КЛИНИНГ</text></g>
+<g><rect x="392" y="190" width="42" height="110" rx="10" fill="#d7141a"/><rect x="402" y="170" width="22" height="24" rx="4" fill="#2a2a2e"/></g>
+</svg></div>
+</div>
+<div class="stats">
+<div class="stat"><b>3 000 000</b><span>единиц готовой продукции</span></div>
+<div class="stat"><b>с 2008</b><span>работаем на рынке</span></div>
+<div class="stat"><b>19+</b><span>категорий в каталоге</span></div>
+<div class="stat"><b>РФ и СНГ</b><span>география поставок</span></div>
+</div>
+</div>
+</div>
+
+<section id="dealers">
+<div class="wrap">
+<h2>Как с нами работать</h2>
+<p class="sub">Выберите свой сценарий, и мы сразу покажем нужные условия.</p>
+<div class="paths">
+<div class="path main">
+<h3>Дилерам и оптовикам</h3>
+<p>Прайс-лист, условия для дилеров, минимальные партии, логистика и маркетинговая поддержка. Ответим в течение рабочего дня.</p>
+<a class="btn" href="#request">Стать дилером</a>
+</div>
+<div class="path">
+<h3>Контрактное производство</h3>
+<p>Выпуск продукции под вашей маркой на нашем аэрозольном и жидком производстве.</p>
+<a class="more" href="https://ctm.pro-him.com">Перейти на сайт →</a>
+</div>
+<div class="path">
+<h3>Где купить</h3>
+<p>Ищете продукцию для себя или автомойки? Покажем магазины и интернет-магазин.</p>
+<a class="more" href="https://pro-him.com/gde-kupit/">Найти магазин →</a>
+</div>
+</div>
+</div>
+</section>
+
+<section id="catalog" class="alt">
+<div class="wrap">
+<h2>Каталог</h2>
+<p class="sub">Два больших направления. Выберите категорию, чтобы посмотреть ассортимент.</p>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" aria-selected="true" data-t="auto">Автохимия</button>
+<button class="tab" role="tab" aria-selected="false" data-t="home">Бытовая химия и клининг</button>
+</div>
+<div class="grid" id="auto">
+<a class="tile" href="https://pro-him.com/catalog/685/"><i>01</i><span>Автошампуни и воск для сушки</span></a>
+<a class="tile" href="https://pro-him.com/catalog/663/"><i>02</i><span>Влажные салфетки, очистители для рук</span></a>
+<a class="tile" href="https://pro-him.com/catalog/655/"><i>03</i><span>Для колёс и шин</span></a>
+<a class="tile" href="https://pro-him.com/catalog/667/"><i>04</i><span>Для подкапотного пространства</span></a>
+<a class="tile" href="https://pro-him.com/catalog/648/"><i>05</i><span>Для салона</span></a>
+<a class="tile" href="https://pro-him.com/catalog/662/"><i>06</i><span>Для стёкол, фар и кузова</span></a>
+<a class="tile" href="https://pro-him.com/catalog/668/"><i>07</i><span>Клеи и герметики</span></a>
+<a class="tile" href="https://pro-him.com/catalog/654/"><i>08</i><span>Лакокрасочные материалы</span></a>
+<a class="tile" href="https://pro-him.com/catalog/646/"><i>09</i><span>Сервисные средства и смазки</span></a>
+<a class="tile" href="https://pro-him.com/catalog/659/"><i>10</i><span>Средства от коррозии</span></a>
+</div>
+<div class="grid" id="home" hidden>
+<a class="tile" href="https://pro-him.com/catalog/771/"><i>01</i><span>Очистка после ремонта</span></a>
+<a class="tile" href="https://pro-him.com/catalog/772/"><i>02</i><span>Моющие средства для пола</span></a>
+<a class="tile" href="https://pro-him.com/catalog/773/"><i>03</i><span>Концентраты для ковровых покрытий</span></a>
+<a class="tile" href="https://pro-him.com/catalog/774/"><i>04</i><span>Индустриальные очистители</span></a>
+<a class="tile" href="https://pro-him.com/catalog/775/"><i>05</i><span>Универсальные моющие средства</span></a>
+<a class="tile" href="https://pro-him.com/catalog/776/"><i>06</i><span>Моющие средства для посуды</span></a>
+<a class="tile" href="https://pro-him.com/catalog/777/"><i>07</i><span>Дезинфицирующие средства</span></a>
+<a class="tile" href="https://pro-him.com/catalog/778/"><i>08</i><span>Жидкое мыло</span></a>
+<a class="tile" href="https://pro-him.com/catalog/779/"><i>09</i><span>Очистители стёкол и зеркал</span></a>
+</div>
+</div>
+</section>
+
+<section id="quality">
+<div class="wrap">
+<h2>Завод, которому можно доверять поставки</h2>
+<p class="sub">Разрабатываем составы с учётом российских условий эксплуатации и требований безопасности.</p>
+<div class="cols">
+<div class="col"><span class="n">01</span><h3>Контроль на всех этапах</h3><p>Производство под наблюдением ОТК, тестирование в отделе контроля качества.</p></div>
+<div class="col"><span class="n">02</span><h3>Стабильные цены</h3><p>Выстроенные производство, логистика и маркетинг позволяют держать цену.</p></div>
+<div class="col"><span class="n">03</span><h3>Фасовка под задачу</h3><p>Разные объёмы для профессионалов, автомоек и частных покупателей.</p></div>
+<div class="col"><span class="n">04</span><h3>Узнаваемая упаковка</h3><p>Фирменный стиль этикеток помогает товару выделяться на полке.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt">
+<div class="wrap">
+<h2>Новости и события</h2>
+<p class="sub">Выставки и новости компании. Официальные уведомления вынесены в отдельный раздел «Документы».</p>
+<div class="news">
+<div class="card"><time>Заголовок новости · дата</time><h4>Анонс выставки или отраслевого события</h4></div>
+<div class="card"><time>Заголовок новости · дата</time><h4>Новинка ассортимента или запуск линейки</h4></div>
+<div class="card"><time>Заголовок новости · дата</time><h4>Новости производства и партнёров</h4></div>
+</div>
+</div>
+</section>
+
+<section id="request">
+<div class="wrap">
+<div class="lead-form">
+<div>
+<h2>Получите условия для дилеров</h2>
+<p>Оставьте заявку, и менеджер отдела оптовых продаж вышлет прайс-лист и условия сотрудничества.</p>
+</div>
+<form id="f">
+<input class="full" name="name" placeholder="Ваше имя" required>
+<input name="phone" type="tel" placeholder="Телефон" required>
+<input name="company" placeholder="Компания">
+<select class="full" name="type"><option>Хочу стать дилером</option><option>Оптовые закупки</option><option>Автомойка / сервис</option><option>Другое</option></select>
+<button class="btn" type="submit">Отправить заявку</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+
+<footer id="contacts">
+<div class="wrap">
+<div class="foot">
+<div><div class="logo">PRO<b>HIM</b></div><p>НПО Прохим — производитель автохимии, автокосметики, бытовой химии и средств для клининга.</p></div>
+<div><h5>Компания</h5><a href="https://pro-him.com/about/">О компании</a><a href="https://pro-him.com/text-novosti/">Новости</a><a href="https://pro-him.com/contacts/">Контакты</a></div>
+<div><h5>Партнёрам</h5><a href="https://pro-him.com/for_dealers/">Дилерам</a><a href="https://ctm.pro-him.com">Контрактное производство</a><a href="https://pro-him.com/gde-kupit/">Где купить</a></div>
+<div><h5>Связаться</h5><a href="tel:88005556786">8 800 555-67-86</a><a href="tel:84952215373">8 (495) 221-53-73</a><a href="https://pro-him.com/klientskaya-sluzhba/">Клиентская служба</a></div>
+</div>
+<p class="note">© 2008–2026 PRO-HIM.COM. Информация на сайте не является публичной офертой. Прототип: цифры, тексты новостей и подписи телефонов нужно подтвердить.</p>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(b){
+b.addEventListener('click',function(){
+document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+document.getElementById('auto').hidden=b.dataset.t!=='auto';
+document.getElementById('home').hidden=b.dataset.t!=='home';
+});
+});
+document.getElementById('f').addEventListener('submit',function(e){
+e.preventDefault();
+var p=document.createElement('p');p.className='ok';p.textContent='Спасибо! Это прототип: заявка никуда не отправляется.';
+e.target.replaceWith(p);
+});
+</script>
+</body>
+</html>
