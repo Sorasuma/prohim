@@ -11,7 +11,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{--bg:#0b0b0c;--surface:#161618;--ink:#f3f3f4;--muted:#a3a3ab;--line:#2a2a2e;--brand:#26262a;--brand-ink:#fff;--accent:#ea2a30;--soft:#1f1f22}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);scroll-behavior:smooth}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:#0d0d0d;border-bottom:3px solid var(--accent)}
@@ -66,12 +66,12 @@ h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:0 0 8px}
 .tabs{display:inline-flex;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:24px}
 .tab{border:0;background:none;padding:10px 20px;border-radius:9px;font:600 15px inherit;font-family:inherit;color:var(--muted);cursor:pointer}
 .tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
 .grid[hidden]{display:none}
-.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-height:118px;transition:.15s}
-.tile:hover{border-color:var(--accent);transform:translateY(-2px)}
-.tile i{font-style:normal;width:36px;height:36px;border-radius:10px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:14px}
-.tile span{font-weight:600;font-size:15px;line-height:1.3}
+.tile{background:var(--soft);border:1px solid transparent;border-radius:6px;padding:26px 12px 18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;min-height:150px;text-align:center;transition:.18s}
+.tile:hover{background:var(--surface);border-color:var(--line);box-shadow:0 6px 18px rgba(0,0,0,.14);transform:translateY(-2px)}
+.ico{width:54px;height:54px;color:var(--accent);fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tile span{font-weight:700;font-size:13.5px;line-height:1.25;hyphens:none}
 .alt{background:var(--surface);border-block:1px solid var(--line)}
 .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .col h3{margin:0 0 6px;font-size:17px}
@@ -95,13 +95,32 @@ footer{padding:40px 0;color:var(--muted);font-size:14px;border-top:1px solid var
 .foot a{display:block;padding:3px 0}
 .foot a:hover{color:var(--ink)}
 .note{margin-top:28px;font-size:12px}
+.slider{position:relative;overflow:hidden}
+.track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1);touch-action:pan-y}
+.slide{flex:0 0 100%;min-width:0;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.slide-text,.slide-art{min-width:0}
+.slide h1{font-size:clamp(26px,3.6vw,44px);line-height:1.12;overflow-wrap:normal;word-break:normal;hyphens:none;text-wrap:balance}
+.slide .lead,.slide .eyebrow{hyphens:none;overflow-wrap:normal;text-wrap:pretty}
+.slide-art{display:flex;justify-content:center}
+.ctrl{display:flex;align-items:center;justify-content:space-between;margin-top:20px;gap:12px}
+.dots{display:flex}
+.dot{width:30px;height:32px;border:0;background:none;padding:0;cursor:pointer;display:grid;place-items:center}
+.dot::before{content:"";width:20px;height:4px;border-radius:2px;background:#4a4a50;transition:.25s}
+.dot[aria-current="true"]::before{width:30px;background:var(--accent)}
+.arrows{display:flex;gap:8px}
+.arr{width:44px;height:44px;border-radius:50%;border:1.5px solid #4a4a50;background:transparent;color:#fff;font-size:18px;cursor:pointer;font-family:inherit}
+.arr:hover{border-color:var(--accent);background:var(--accent)}
+@media (prefers-reduced-motion:reduce){.track{transition:none}}
 @media (max-width:900px){
+.hero{padding:28px 0 32px}.slide{grid-template-columns:1fr;gap:20px}.slide .lead{font-size:16px;margin-bottom:20px}.art{width:auto;height:180px;max-width:100%}.cta .btn{flex:1 1 auto;text-align:center}.dot{width:26px}.dot::before{width:16px}.dot[aria-current="true"]::before{width:26px}
 nav,.phone{display:none}.bar{justify-content:space-between}
 .hero-grid,.paths,.lead-form{grid-template-columns:1fr}
 .stats,.cols{grid-template-columns:repeat(2,1fr)}
 .news{grid-template-columns:1fr}.foot{grid-template-columns:1fr 1fr}
 .lead-form{padding:26px}form{grid-template-columns:1fr}
 }
+@media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.tile{min-height:132px;padding:20px 8px 14px}.tile span{font-size:13px}.ico{width:46px;height:46px}}
+@media (max-width:380px){.slide h1{font-size:24px}}
 </style>
 </head>
 <body>
@@ -116,29 +135,21 @@ nav,.phone{display:none}.bar{justify-content:space-between}
 </div>
 </header>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-foam" viewBox="0 0 48 48"><path d="M24 6c5 7 9 11 9 17a9 9 0 0 1-18 0c0-6 4-10 9-17z"/><circle cx="10" cy="40" r="4"/><circle cx="24" cy="41" r="3"/><circle cx="38" cy="40" r="4"/></symbol><symbol id="i-wipes" viewBox="0 0 48 48"><rect x="9" y="14" width="30" height="27" rx="4"/><path d="M14 14V8h20v6"/><path d="M24 22c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9z"/></symbol><symbol id="i-wheel" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="5"/><path d="M24 7v12M24 29v12M7 24h12M29 24h12M12 12l8 8M28 28l8 8"/></symbol><symbol id="i-engine" viewBox="0 0 48 48"><rect x="12" y="16" width="24" height="20" rx="2"/><path d="M18 16v-5h12v5M6 22v10M12 26H9M36 24h6M42 21v11"/><path d="M25 20l-4 7h5l-3 6"/></symbol><symbol id="i-seat" viewBox="0 0 48 48"><path d="M15 7c-3 0-5 2-5 5l-2 17c0 3 2 5 5 5h17l5 8"/><path d="M6 43h36"/><path d="M15 7h6c2 0 3 1 3 3l1 12"/></symbol><symbol id="i-car" viewBox="0 0 48 48"><path d="M8 30l3-11c1-3 3-4 6-4h14c3 0 5 1 6 4l3 11"/><rect x="6" y="30" width="36" height="10" rx="3"/><circle cx="14" cy="35" r="2"/><circle cx="34" cy="35" r="2"/><path d="M6 25H3M42 25h3"/></symbol><symbol id="i-tube" viewBox="0 0 48 48"><path d="M8 18h26v12H8z"/><path d="M34 21h6l3 3-3 3h-6"/><path d="M8 18l-3-4v20l3-4"/><path d="M14 18v12M20 18v12"/></symbol><symbol id="i-roller" viewBox="0 0 48 48"><rect x="8" y="8" width="28" height="10" rx="3"/><path d="M36 13h4v10H24v6"/><rect x="21" y="29" width="6" height="12" rx="2"/></symbol><symbol id="i-wrench" viewBox="0 0 48 48"><path d="M30 6a9 9 0 0 0-8 12L8 32a4 4 0 0 0 6 6l14-14a9 9 0 0 0 12-8l-6 4-5-1-1-5z"/></symbol><symbol id="i-shield" viewBox="0 0 48 48"><path d="M24 6l14 5v11c0 9-6 16-14 20-8-4-14-11-14-20V11z"/><path d="M24 17c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9z"/></symbol><symbol id="i-broom" viewBox="0 0 48 48"><path d="M34 6L26 26"/><path d="M16 26h16l4 15H12z"/><path d="M20 26l-1 15M26 26v15M32 26l1 15"/></symbol><symbol id="i-bucket" viewBox="0 0 48 48"><path d="M8 16h32l-4 26H12z"/><path d="M8 16c4-4 28-4 32 0"/><path d="M14 27h20"/></symbol><symbol id="i-rug" viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="24" rx="2"/><rect x="13" y="17" width="22" height="14"/><path d="M12 36v5M18 36v5M24 36v5M30 36v5M36 36v5"/></symbol><symbol id="i-gear" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><circle cx="24" cy="24" r="12"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></symbol><symbol id="i-spray" viewBox="0 0 48 48"><rect x="13" y="22" width="18" height="20" rx="4"/><path d="M18 22v-6h12l8 3v-6l-8 2H20"/><path d="M40 26h3M40 31h3"/></symbol><symbol id="i-plate" viewBox="0 0 48 48"><circle cx="22" cy="26" r="15"/><circle cx="22" cy="26" r="8"/><circle cx="38" cy="10" r="4"/><circle cx="43" cy="18" r="2"/></symbol><symbol id="i-shieldplus" viewBox="0 0 48 48"><path d="M24 6l14 5v11c0 9-6 16-14 20-8-4-14-11-14-20V11z"/><path d="M24 16v14M17 23h14"/></symbol><symbol id="i-soap" viewBox="0 0 48 48"><rect x="12" y="20" width="20" height="22" rx="4"/><path d="M22 20v-8M16 12h14M30 12l6 4"/><path d="M39 22c1 2 2 3 2 4a2 2 0 0 1-4 0c0-1 1-2 2-4z"/></symbol><symbol id="i-window" viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="2"/><path d="M24 8v32M8 24h32"/><path d="M30 14l3 3M33 14l-3 3"/></symbol></defs></svg>
 <main>
 <div class="hero">
 <div class="wrap">
-<div class="hero-grid">
-<div>
-<div class="eyebrow">НПО Прохим · завод-производитель</div>
-<h1>Автохимия и бытовая химия для вашего бизнеса</h1>
-<p class="lead">Оптовые поставки от производителя во все регионы России и СНГ. Стабильные цены, контроль качества на каждом этапе и готовая дилерская программа.</p>
-<div class="cta">
-<a class="btn primary" href="#request">Стать дилером</a>
-<a class="btn ghost" href="#request">Получить прайс-лист</a>
-<small>Нужна своя марка? <a href="https://ctm.pro-him.com">Контрактное производство →</a></small>
-</div>
-<ul class="check"><li>Цены завода без лишних посредников</li><li>Более 19 категорий: авто, клининг, бытовая химия</li><li>Фасовка для мойки, сервиса и розницы: от аэрозолей до канистр</li><li>Поставки в регионы России и СНГ</li></ul>
-</div>
-<svg class="art" viewBox="0 0 460 340" role="img" aria-label="Продукция Прохим: аэрозоли, канистра и бутылки">
+<div class="slider" id="sl" role="region" aria-roledescription="carousel" aria-label="Главные предложения"><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="can" viewBox="0 0 80 230"><rect y="34" width="80" height="196" rx="14" style="fill:var(--c1,#f3f3f4)"/><rect x="18" width="44" height="40" rx="7" fill="#2a2a2e"/><rect y="110" width="80" height="62" style="fill:var(--c2,#d7141a)"/></symbol>
+<symbol id="jug" viewBox="0 0 150 170"><rect y="30" width="110" height="140" rx="16" style="fill:var(--c1)"/><rect x="34" width="42" height="36" rx="7" fill="#2a2a2e"/><path d="M110 62h18q14 0 14 14v42q0 14-14 14h-18" fill="none" stroke-width="12" style="stroke:var(--c1)"/><rect y="92" width="110" height="52" style="fill:var(--c2)"/></symbol>
+<symbol id="bottle" viewBox="0 0 70 200"><rect y="60" width="70" height="140" rx="16" style="fill:var(--c1)"/><rect x="22" y="30" width="26" height="36" fill="#2a2a2e"/><rect x="8" y="6" width="54" height="28" rx="7" fill="#2a2a2e"/><rect y="112" width="70" height="50" style="fill:var(--c2)"/></symbol>
+</defs></svg><div class="track"><div class="slide"><div class="slide-text"><div class="eyebrow">Дилерам и оптовикам</div><h1>Автохимия и бытовая химия для вашего бизнеса</h1><p class="lead">Прямые поставки от производителя в регионы России и СНГ. Стабильные цены и готовая дилерская программа.</p><div class="cta"><a class="btn primary" href="#request">Стать дилером</a><a class="btn ghost" href="#request">Получить прайс-лист</a></div></div><div class="slide-art"><svg class="art" viewBox="0 0 460 340" role="img" aria-label="Продукция Прохим: аэрозоли, канистра и бутылки">
 <rect x="20" y="300" width="420" height="10" rx="5" fill="#d7141a"/>
 <g><rect x="40" y="90" width="78" height="210" rx="14" fill="#f3f3f4"/><rect x="58" y="60" width="42" height="34" rx="6" fill="#2a2a2e"/><rect x="40" y="150" width="78" height="60" fill="#d7141a"/><text x="79" y="188" text-anchor="middle" font-family="Arial" font-weight="800" font-size="16" fill="#fff">АВТО</text></g>
 <g><rect x="140" y="60" width="86" height="240" rx="14" fill="#1c1c1f" stroke="#3a3a40"/><rect x="160" y="28" width="46" height="36" rx="6" fill="#d7141a"/><rect x="140" y="130" width="86" height="70" fill="#d7141a"/><text x="183" y="174" text-anchor="middle" font-family="Arial" font-weight="800" font-size="17" fill="#fff">PROHIM</text></g>
 <g><rect x="250" y="120" width="120" height="180" rx="16" fill="#f3f3f4"/><rect x="284" y="94" width="52" height="30" rx="6" fill="#2a2a2e"/><path d="M370 150h26q14 0 14 14v50q0 14-14 14h-26" fill="none" stroke="#f3f3f4" stroke-width="12"/><rect x="250" y="176" width="120" height="66" fill="#0d0d0d"/><text x="310" y="216" text-anchor="middle" font-family="Arial" font-weight="800" font-size="16" fill="#fff">КЛИНИНГ</text></g>
 <g><rect x="392" y="190" width="42" height="110" rx="10" fill="#d7141a"/><rect x="402" y="170" width="22" height="24" rx="4" fill="#2a2a2e"/></g>
-</svg></div>
-</div>
+</svg></div></div><div class="slide"><div class="slide-text"><div class="eyebrow">Собственный завод</div><h1>3 000 000 единиц продукции с нашего производства</h1><p class="lead">Аэрозольная линия, жидкие составы и строгий контроль ОТК на каждом этапе.</p><div class="cta"><a class="btn primary" href="#quality">О заводе</a><a class="btn ghost" href="#request">Стать дилером</a></div></div><div class="slide-art"><svg class="art" viewBox="0 0 460 320" role="img" aria-label="3 000 000 единиц продукции"><rect x="20" y="300" width="420" height="10" rx="5" fill="#d7141a"/><circle cx="230" cy="160" r="128" fill="#d7141a"/><text x="230" y="160" text-anchor="middle" font-family="Arial" font-weight="800" font-size="46" fill="#fff">3 000 000</text><text x="230" y="190" text-anchor="middle" font-family="Arial" font-size="17" fill="#fff">единиц продукции</text><use href="#can" x="30" y="120" width="64" height="184" style="--c1:#1c1c1f;--c2:#d7141a"/><use href="#can" x="366" y="120" width="64" height="184" style="--c1:#f3f3f4;--c2:#d7141a"/></svg></div></div><div class="slide"><div class="slide-text"><div class="eyebrow">Автохимия</div><h1>Всё для мойки, детейлинга и сервиса</h1><p class="lead">Автошампуни, полироли, очистители, смазки и средства от коррозии: 10 категорий.</p><div class="cta"><a class="btn primary" href="#catalog">Смотреть каталог</a><a class="btn ghost" href="#request">Получить прайс-лист</a></div></div><div class="slide-art"><svg class="art" viewBox="0 0 460 320" role="img" aria-label="Автохимия"><rect x="20" y="300" width="420" height="10" rx="5" fill="#d7141a"/><use href="#can" x="30" y="110" width="70" height="201" style="--c1:#f3f3f4;--c2:#d7141a"/><use href="#can" x="112" y="70" width="80" height="230" style="--c1:#1c1c1f;--c2:#d7141a"/><use href="#bottle" x="210" y="100" width="70" height="200" style="--c1:#f3f3f4;--c2:#0d0d0d"/><use href="#can" x="296" y="90" width="76" height="218" style="--c1:#d7141a;--c2:#0d0d0d"/><use href="#can" x="380" y="130" width="58" height="166" style="--c1:#f3f3f4;--c2:#d7141a"/></svg></div></div><div class="slide"><div class="slide-text"><div class="eyebrow">Бытовая химия и клининг</div><h1>Средства для уборки и дезинфекции</h1><p class="lead">Для пола, сантехники, посуды, жидкое мыло и профессиональные концентраты.</p><div class="cta"><a class="btn primary" href="#catalog">Смотреть каталог</a><a class="btn ghost" href="#request">Получить прайс-лист</a></div></div><div class="slide-art"><svg class="art" viewBox="0 0 460 320" role="img" aria-label="Бытовая химия и клининг"><rect x="20" y="300" width="420" height="10" rx="5" fill="#d7141a"/><use href="#jug" x="30" y="130" width="150" height="170" style="--c1:#f3f3f4;--c2:#d7141a"/><use href="#bottle" x="200" y="100" width="70" height="200" style="--c1:#1c1c1f;--c2:#d7141a"/><use href="#jug" x="290" y="153" width="130" height="147" style="--c1:#d7141a;--c2:#0d0d0d"/></svg></div></div><div class="slide"><div class="slide-text"><div class="eyebrow">Контрактное производство</div><h1>Выпустим продукцию под вашей маркой</h1><p class="lead">Аэрозольное и жидкое производство, разработка рецептур, фасовка под вашу задачу.</p><div class="cta"><a class="btn primary" href="https://ctm.pro-him.com">Перейти на сайт</a><a class="btn ghost" href="#request">Стать дилером</a></div></div><div class="slide-art"><svg class="art" viewBox="0 0 460 320" role="img" aria-label="Продукция под вашей маркой"><rect x="20" y="300" width="420" height="10" rx="5" fill="#d7141a"/><use href="#can" x="60" y="150" width="52" height="150" style="--c1:#1c1c1f;--c2:#d7141a"/><use href="#can" x="348" y="150" width="52" height="150" style="--c1:#1c1c1f;--c2:#d7141a"/><use href="#can" x="180" y="13" width="100" height="287" style="--c1:#f3f3f4;--c2:#0d0d0d"/><text x="230" y="196" text-anchor="middle" font-family="Arial" font-weight="800" font-size="13" fill="#fff">ВАША МАРКА</text></svg></div></div></div><div class="ctrl"><div class="dots"></div><div class="arrows"><button class="arr" id="pv" aria-label="Назад">←</button><button class="arr" id="nx" aria-label="Вперёд">→</button></div></div></div>
 <div class="stats">
 <div class="stat"><b>3 000 000</b><span>единиц готовой продукции</span></div>
 <div class="stat"><b>с 2008</b><span>работаем на рынке</span></div>
@@ -181,27 +192,27 @@ nav,.phone{display:none}.bar{justify-content:space-between}
 <button class="tab" role="tab" aria-selected="false" data-t="home">Бытовая химия и клининг</button>
 </div>
 <div class="grid" id="auto">
-<a class="tile" href="https://pro-him.com/catalog/685/"><i>01</i><span>Автошампуни и воск для сушки</span></a>
-<a class="tile" href="https://pro-him.com/catalog/663/"><i>02</i><span>Влажные салфетки, очистители для рук</span></a>
-<a class="tile" href="https://pro-him.com/catalog/655/"><i>03</i><span>Для колёс и шин</span></a>
-<a class="tile" href="https://pro-him.com/catalog/667/"><i>04</i><span>Для подкапотного пространства</span></a>
-<a class="tile" href="https://pro-him.com/catalog/648/"><i>05</i><span>Для салона</span></a>
-<a class="tile" href="https://pro-him.com/catalog/662/"><i>06</i><span>Для стёкол, фар и кузова</span></a>
-<a class="tile" href="https://pro-him.com/catalog/668/"><i>07</i><span>Клеи и герметики</span></a>
-<a class="tile" href="https://pro-him.com/catalog/654/"><i>08</i><span>Лакокрасочные материалы</span></a>
-<a class="tile" href="https://pro-him.com/catalog/646/"><i>09</i><span>Сервисные средства и смазки</span></a>
-<a class="tile" href="https://pro-him.com/catalog/659/"><i>10</i><span>Средства от коррозии</span></a>
+<a class="tile" href="https://pro-him.com/catalog/685/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-foam"/></svg><span>Автошампуни и воск для сушки</span></a>
+<a class="tile" href="https://pro-him.com/catalog/663/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-wipes"/></svg><span>Влажные салфетки, очистители для рук</span></a>
+<a class="tile" href="https://pro-him.com/catalog/655/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-wheel"/></svg><span>Для колёс и шин</span></a>
+<a class="tile" href="https://pro-him.com/catalog/667/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-engine"/></svg><span>Для подкапотного пространства</span></a>
+<a class="tile" href="https://pro-him.com/catalog/648/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-seat"/></svg><span>Для салона</span></a>
+<a class="tile" href="https://pro-him.com/catalog/662/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-car"/></svg><span>Для стёкол, фар и кузова</span></a>
+<a class="tile" href="https://pro-him.com/catalog/668/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-tube"/></svg><span>Клеи и герметики</span></a>
+<a class="tile" href="https://pro-him.com/catalog/654/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-roller"/></svg><span>Лакокрасочные материалы</span></a>
+<a class="tile" href="https://pro-him.com/catalog/646/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-wrench"/></svg><span>Сервисные средства и смазки</span></a>
+<a class="tile" href="https://pro-him.com/catalog/659/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-shield"/></svg><span>Средства от коррозии</span></a>
 </div>
 <div class="grid" id="home" hidden>
-<a class="tile" href="https://pro-him.com/catalog/771/"><i>01</i><span>Очистка после ремонта</span></a>
-<a class="tile" href="https://pro-him.com/catalog/772/"><i>02</i><span>Моющие средства для пола</span></a>
-<a class="tile" href="https://pro-him.com/catalog/773/"><i>03</i><span>Концентраты для ковровых покрытий</span></a>
-<a class="tile" href="https://pro-him.com/catalog/774/"><i>04</i><span>Индустриальные очистители</span></a>
-<a class="tile" href="https://pro-him.com/catalog/775/"><i>05</i><span>Универсальные моющие средства</span></a>
-<a class="tile" href="https://pro-him.com/catalog/776/"><i>06</i><span>Моющие средства для посуды</span></a>
-<a class="tile" href="https://pro-him.com/catalog/777/"><i>07</i><span>Дезинфицирующие средства</span></a>
-<a class="tile" href="https://pro-him.com/catalog/778/"><i>08</i><span>Жидкое мыло</span></a>
-<a class="tile" href="https://pro-him.com/catalog/779/"><i>09</i><span>Очистители стёкол и зеркал</span></a>
+<a class="tile" href="https://pro-him.com/catalog/771/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-broom"/></svg><span>Очистка после ремонта</span></a>
+<a class="tile" href="https://pro-him.com/catalog/772/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-bucket"/></svg><span>Моющие средства для пола</span></a>
+<a class="tile" href="https://pro-him.com/catalog/773/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-rug"/></svg><span>Концентраты для ковровых покрытий</span></a>
+<a class="tile" href="https://pro-him.com/catalog/774/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-gear"/></svg><span>Индустриальные очистители</span></a>
+<a class="tile" href="https://pro-him.com/catalog/775/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-spray"/></svg><span>Универсальные моющие средства</span></a>
+<a class="tile" href="https://pro-him.com/catalog/776/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-plate"/></svg><span>Моющие средства для посуды</span></a>
+<a class="tile" href="https://pro-him.com/catalog/777/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-shieldplus"/></svg><span>Дезинфицирующие средства</span></a>
+<a class="tile" href="https://pro-him.com/catalog/778/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-soap"/></svg><span>Жидкое мыло</span></a>
+<a class="tile" href="https://pro-him.com/catalog/779/"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-window"/></svg><span>Очистители стёкол и зеркал</span></a>
 </div>
 </div>
 </section>
@@ -275,6 +286,18 @@ e.preventDefault();
 var p=document.createElement('p');p.className='ok';p.textContent='Спасибо! Это прототип: заявка никуда не отправляется.';
 e.target.replaceWith(p);
 });
+(function(){var sl=document.getElementById('sl'),tr=sl.querySelector('.track'),ss=[].slice.call(tr.children),dd=sl.querySelector('.dots'),i=0,t,x0=0,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ss.forEach(function(_,k){var d=document.createElement('button');d.className='dot';d.setAttribute('aria-label','Слайд '+(k+1));d.onclick=function(){go(k,1)};dd.appendChild(d)});
+function go(n,u){i=(n+ss.length)%ss.length;tr.style.transform='translateX('+(-100*i)+'%)';ss.forEach(function(s,k){s.inert=k!==i;s.setAttribute('aria-hidden',k!==i)});[].forEach.call(dd.children,function(d,k){d.setAttribute('aria-current',k===i)});if(u)play()}
+function stop(){clearInterval(t)}
+function play(){stop();if(!rm)t=setInterval(function(){go(i+1)},6500)}
+document.getElementById('pv').onclick=function(){go(i-1,1)};
+document.getElementById('nx').onclick=function(){go(i+1,1)};
+sl.addEventListener('mouseenter',stop);sl.addEventListener('mouseleave',play);sl.addEventListener('focusin',stop);
+sl.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;stop()},{passive:true});
+sl.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)go(i+(d<0?1:-1),1);else play()});
+document.addEventListener('visibilitychange',function(){document.hidden?stop():play()});
+go(0);play();})();
 </script>
 </body>
 </html>
